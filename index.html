@@ -24,87 +24,68 @@
             padding: 0 20px;
         }
 
-        
-/* Navigation Styles */
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
+        /* Navigation Styles */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
 
-.nav-links li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-.nav-links li a:hover {
-    color: #667eea;
-}
+        .nav-links li a:hover {
+            color: #667eea;
+        }
 
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
 
-.menu-toggle {
-    display: none;
-    cursor: pointer;
-}
+        .menu-toggle:hover {
+            opacity: 0.7;
+        }
 
-.menu-toggle:hover {
-    opacity: 0.7;
-}
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
 
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-}
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
 
-.menu-toggle {
-    display: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-}
+        /* Responsive Menu */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                background: white;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                padding: 1rem 2rem;
+                display: none;
+            }
 
-/* Responsive Menu */
-@media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column;
-        gap: 1rem;
-        background: white;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-        padding: 1rem 2rem;
-        display: none;
-    }
+            .nav-links.active {
+                display: flex;
+            }
 
-    .nav-links.active {
-        display: flex;
-    }
-
-    
-.menu-toggle {
-    display: none;
-    cursor: pointer;
-}
-
-.menu-toggle:hover {
-    opacity: 0.7;
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-}
-
-.menu-toggle {
-        display: block;
-    }
-}
-
+            .menu-toggle {
+                display: block;
+            }
+        }
 
         /* Header */
         header {
@@ -264,7 +245,7 @@
             display: flex;
             gap: 2rem;
             animation: slideTestimonials 25s linear infinite;
-            width: calc(400px * 10); /* Adjust based on number of testimonials */
+            width: calc(400px * 10);
         }
 
         .testimonial {
@@ -469,7 +450,7 @@
             background: #e2e8f0;
         }
 
-        /* Contact Banner */
+        /* Contact Form */
         .contact-banner {
             padding: 5rem 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -477,35 +458,72 @@
             color: white;
         }
 
-        .contact-banner h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto 0;
+            text-align: left;
         }
 
-        .contact-banner p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        .contact-icons {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
         }
 
-        .contact-icon {
-            font-size: 2rem;
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
-        .contact-icon:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            text-align: center;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .form-message.success {
+            background: #f0fff4;
+            color: #2f855a;
+            border: 1px solid #c6f6d5;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #fff5f5;
+            color: #c53030;
+            border: 1px solid #fed7d7;
+            display: block;
         }
 
         /* Footer */
@@ -622,12 +640,12 @@
                 min-width: 280px;
             }
 
-            .contact-icons {
-                flex-wrap: wrap;
-            }
-
             .countries-grid {
                 grid-template-columns: repeat(4, 1fr);
+            }
+
+            .contact-form {
+                padding: 1.5rem;
             }
         }
 
@@ -659,23 +677,19 @@
 <body>
     <!-- Header -->
     <header>
-        
-<nav class="container">
-    <div class="logo">Zendi</div>
-    
-<svg class="menu-toggle" xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 0 24 24" width="32" fill="#333">
-    <path d="M4 6h16M4 12h16M4 18h16" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-    <ul class="nav-links">
-        <li><a href="#hero">Inicio</a></li>
-        <li><a href="#services">Servicios</a></li>
-        <li><a href="#features">Beneficios</a></li>
-        <li><a href="#countries">Países</a></li>
-        <li><a href="#contact">Contacto</a></li>
-    </ul>
-</nav>
-
+        <nav class="container">
+            <div class="logo">Zendi</div>
+            <svg class="menu-toggle" xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 0 24 24" width="32" fill="#333">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <ul class="nav-links">
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#features">Beneficios</a></li>
+                <li><a href="#countries">Países</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
@@ -923,41 +937,65 @@
         <div class="container">
             <h2>¿Listo para transformar tus pagos internacionales?</h2>
             <p>Nuestro equipo está aquí para ayudarte a optimizar tus operaciones financieras</p>
-            <div class="contact-icons">
-                <div class="contact-icon">💬</div>
-                <div class="contact-icon">📧</div>
-                <div class="contact-icon">📞</div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="fullName">Nombre completo</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="agencyName">Nombre de la agencia</label>
+                        <input type="text" id="agencyName" name="agencyName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" required>Cuéntanos sobre tus necesidades de pagos internacionales...</textarea>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                    </div>
+                    
+                    <div id="formMessage" class="form-message"></div>
+                </form>
             </div>
-            <a href="#" class="btn btn-primary">Contáctanos</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Zendi</h3>
-                <p>Soluciones de pago internacionales para agencias de viajes colombianas.</p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon">📘</a>
-                    <a href="#" class="social-icon">📷</a>
-                    <a href="#" class="social-icon">🐦</a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zendi</h3>
+                    <p>Soluciones de pago internacionales para agencias de viajes colombianas.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">📷</a>
+                        <a href="#" class="social-icon">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Legales</h3>
+                    <a href="#">Términos y Condiciones</a>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Política de Tratamiento de Datos</a>
+                    <a href="#">Políticas AML/CFT</a>
+                    <a href="#">Contacto</a>
                 </div>
             </div>
-            <div class="footer-section">
-                <h3>Enlaces Legales</h3>
-                <a href="#">Términos y Condiciones</a>
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Política de Tratamiento de Datos</a>
-                <a href="#">Políticas AML/CFT</a>
-                <a href="#">Contacto</a>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Zendi. Todos los derechos reservados.</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Zendi. Todos los derechos reservados.</p>
-        </div>
-    </div>
     </footer>
 
     <script>
@@ -1018,26 +1056,3 @@
                 slider.addEventListener('mouseenter', () => {
                     slider.style.animationPlayState = 'paused';
                 });
-                
-                slider.addEventListener('mouseleave', () => {
-                    slider.style.animationPlayState = 'running';
-                });
-            }
-        }
-
-        
-// Mobile menu toggle
-document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    toggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-});
-
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initTestimonials);
-    </script>
-</body>
-</html>
