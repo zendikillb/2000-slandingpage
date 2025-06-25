@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zendi - Soluciones de Pago Internacionales</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Styles */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #667eea;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Menu */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                background: white;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                padding: 1rem 2rem;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0.05"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Currency Icons Animation */
+        .currency-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .currency-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .currency-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .currency-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: 1s; }
+        .currency-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: 2s; }
+        .currency-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: 1.5s; }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: #f8fafc;
+            overflow: hidden;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .testimonials-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .testimonials-slider {
+            display: flex;
+            gap: 2rem;
+            animation: slideTestimonials 25s linear infinite;
+            width: calc(400px * 10);
+        }
+
+        .testimonial {
+            min-width: 350px;
+            flex-shrink: 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            animation-play-state: paused;
+        }
+
+        .testimonials-slider:hover {
+            animation-play-state: paused;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
+        }
+
+        .author-info p {
+            color: #718096;
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 0.9rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .service-card p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Feature Blocks */
+        .features {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Countries Section */
+        .countries {
+            padding: 5rem 0;
+            background: white;
+            text-align: center;
+        }
+
+        .countries h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .country-flag {
+            font-size: 3rem;
+            padding: 1rem;
+            border-radius: 15px;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .country-flag:hover {
+            transform: scale(1.1);
+            background: #e2e8f0;
+        }
+
+        /* Contact Form */
+        .contact-banner {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 2rem auto 0;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            text-align: center;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .form-message.success {
+            background: #f0fff4;
+            color: #2f855a;
+            border: 1px solid #c6f6d5;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #fff5f5;
+            color: #c53030;
+            border: 1px solid #fed7d7;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+
+        .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            color: #a0aec0;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #667eea;
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: 1rem;
+            text-align: center;
+            color: #a0aec0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes slideTestimonials {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .services-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-slider {
+                animation-duration: 20s;
+            }
+
+            .testimonial {
+                min-width: 280px;
+            }
+
+            .countries-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .service-card,
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .countries-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .country-flag {
+                font-size: 2rem;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+<nav class="container">
+<div class="logo">Zendi</div>
+<svg class="menu-toggle" fill="#333" height="32" viewbox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16M4 18h16" stroke="#333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<ul class="nav-links">
+<li><a href="#hero">Inicio</a></li>
+<li><a href="#services">Servicios</a></li>
+<li><a href="#features">Beneficios</a></li>
+<li><a href="#countries">Países</a></li>
+<li><a href="#contact">Contacto</a></li>
+</ul>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="hero" id="hero">
+<div class="currency-icons">
+<div class="currency-icon">💵</div>
+<div class="currency-icon">💶</div>
+<div class="currency-icon">💷</div>
+<div class="currency-icon">💴</div>
+</div>
+<div class="container">
+<div class="hero-content">
+<h1>Compra, vende, recibe y envía divisas en tiempo récord a +90 países</h1>
+<p>Sin costo Swift y con tipo de cambio justo a través de nuestra plataforma empresarial.</p>
+<div class="cta-buttons">
+<a class="btn btn-primary" href="#contact">Agendar una reunión</a>
+<a class="btn btn-secondary" href="#onboarding">Comenzar onboarding</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="testimonials">
+<div class="container">
+<h2>Lo que dicen nuestros clientes</h2>
+</div>
+<div class="testimonials-container">
+<div class="testimonials-slider">
+<div class="testimonial">
+<div class="testimonial-content">
+                        "Zendi revolucionó nuestras operaciones internacionales. Los tipos de cambio son excelentes y las transferencias llegan el mismo día."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">MP</div>
+<div class="author-info">
+<h4>María Pérez</h4>
+<p>CEO, Viajes Andinos</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "Finalmente una solución que entiende las necesidades de las agencias de viajes. Sin comisiones ocultas, transparencia total."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">JR</div>
+<div class="author-info">
+<h4>Jorge Rodríguez</h4>
+<p>Director, Turismo Global</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "La plataforma es intuitiva y el soporte es excepcional. Hemos ahorrado miles de dólares en comisiones bancarias."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">AC</div>
+<div class="author-info">
+<h4>Ana Castillo</h4>
+<p>CFO, Destinos Premium</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "Procesamos pagos a proveedores en Europa y Estados Unidos sin problemas. El servicio es confiable y rápido."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">LM</div>
+<div class="author-info">
+<h4>Luis Montenegro</h4>
+<p>Gerente, Aventuras Colombianas</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "La conversión 24/7 nos permite operar sin restricciones horarias. Perfecto para nuestro mercado internacional."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">SM</div>
+<div class="author-info">
+<h4>Sofia Morales</h4>
+<p>Fundadora, Eco Tours</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<!-- Duplicated testimonials for seamless loop -->
+<div class="testimonial">
+<div class="testimonial-content">
+                        "Zendi revolucionó nuestras operaciones internacionales. Los tipos de cambio son excelentes y las transferencias llegan el mismo día."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">MP</div>
+<div class="author-info">
+<h4>María Pérez</h4>
+<p>CEO, Viajes Andinos</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "Finalmente una solución que entiende las necesidades de las agencias de viajes. Sin comisiones ocultas, transparencia total."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">JR</div>
+<div class="author-info">
+<h4>Jorge Rodríguez</h4>
+<p>Director, Turismo Global</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "La plataforma es intuitiva y el soporte es excepcional. Hemos ahorrado miles de dólares en comisiones bancarias."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">AC</div>
+<div class="author-info">
+<h4>Ana Castillo</h4>
+<p>CFO, Destinos Premium</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "Procesamos pagos a proveedores en Europa y Estados Unidos sin problemas. El servicio es confiable y rápido."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">LM</div>
+<div class="author-info">
+<h4>Luis Montenegro</h4>
+<p>Gerente, Aventuras Colombianas</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+<div class="testimonial">
+<div class="testimonial-content">
+                        "La conversión 24/7 nos permite operar sin restricciones horarias. Perfecto para nuestro mercado internacional."
+                    </div>
+<div class="testimonial-author">
+<div class="author-avatar">SM</div>
+<div class="author-info">
+<h4>Sofia Morales</h4>
+<p>Fundadora, Eco Tours</p>
+<div class="stars">★★★★★</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="services" id="services">
+<div class="container">
+<h2>Nuestros Servicios</h2>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon">💱</div>
+<h3>Conversiones a Precios Justos</h3>
+<p>Sin comisiones ocultas, sin papeleo. Conversiones transparentes con el mejor tipo de cambio del mercado.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">⚡</div>
+<h3>Pagos Internacionales</h3>
+<p>Transferencias el mismo día con disponibilidad de conversión 24/7. Sin esperas, sin demoras.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🏦</div>
+<h3>Cobros como Local</h3>
+<p>Cuentas propias en USD y EUR para recibir pagos como si fueras una empresa local en esos países.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🌍</div>
+<h3>Pagos a Proveedores</h3>
+<p>Paga a tus proveedores en el exterior de forma más rápida y económica que los bancos tradicionales.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Blocks Section -->
+<section class="features" id="features">
+<div class="container">
+<h2>¿Por qué elegir Zendi?</h2>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">🌍</div>
+<h3>Tu Cuenta Global Empresas</h3>
+<p>Con ella no existen fronteras. Podrás usarla hasta en 8 monedas distintas haciendo intercambios instantáneos al tipo de cambio spot (puedes verificarlo en Google).</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">💸</div>
+<h3>Recibe dinero desde todo el mundo</h3>
+<p>Comparte los datos de tus cuentas en USD y EUR para cobrar como local. Tu cliente hará una simple transferencia y tú recibirás el dinero en la misma moneda de origen.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">✈️</div>
+<h3>Transferencias nacionales e internacionales</h3>
+<p>Paga en moneda local a proveedores, servicios freelance y nóminas a +70 destinos sin comisiones y sin esfuerzo.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Countries Section -->
+<section class="countries" id="countries">
+<div class="container">
+<h2>Estamos presentes en +90 países</h2>
+<div class="countries-grid">
+<div class="country-flag">🇺🇸</div>
+<div class="country-flag">🇬🇧</div>
+<div class="country-flag">🇨🇴</div>
+<div class="country-flag">🇪🇸</div>
+<div class="country-flag">🇩🇪</div>
+<div class="country-flag">🇨🇱</div>
+<div class="country-flag">🇦🇷</div>
+<div class="country-flag">🇫🇷</div>
+<div class="country-flag">🇮🇹</div>
+<div class="country-flag">🇧🇷</div>
+<div class="country-flag">🇲🇽</div>
+<div class="country-flag">🇨🇦</div>
+<div class="country-flag">🇵🇪</div>
+<div class="country-flag">🇪🇨</div>
+<div class="country-flag">🇺🇾</div>
+<div class="country-flag">🇵🇾</div>
+</div>
+</div>
+</section>
+<!-- Contact Banner -->
+<section class="contact-banner" id="contact">
+<div class="container">
+<h2>¿Listo para transformar tus pagos internacionales?</h2>
+<p>Nuestro equipo está aquí para ayudarte a optimizar tus operaciones financieras</p>
+<div class="contact-form">
+<form id="contactForm">
+<div class="form-group">
+<label for="fullName">Nombre completo</label>
+<input id="fullName" name="fullName" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="email">Correo electrónico</label>
+<input id="email" name="email" required="" type="email"/>
+</div>
+<div class="form-group">
+<label for="agencyName">Nombre de la agencia</label>
+<input id="agencyName" name="agencyName" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="message">Mensaje</label>
+<textarea id="message" name="message" required="">Cuéntanos sobre tus necesidades de pagos internacionales...</textarea>
+</div>
+<div class="form-submit">
+<button class="btn btn-primary" type="submit">Enviar Mensaje</button>
+</div>
+<div class="form-message" id="formMessage"></div>
+</form>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="footer-content">
+<div class="footer-section">
+<h3>Zendi</h3>
+<p>Soluciones de pago internacionales para agencias de viajes colombianas.</p>
+<div class="social-icons">
+<a class="social-icon" href="#">📘</a>
+<a class="social-icon" href="#">📷</a>
+<a class="social-icon" href="#">🐦</a>
+</div>
+</div>
+<div class="footer-section">
+<h3>Enlaces Legales</h3>
+<a href="terminos.html" target="_blank">Términos y Condiciones</a>
+<a href="#">Política de Privacidad</a>
+<a href="datos.html" target="_blank">Política de Tratamiento de Datos</a>
+<a href="aml.html" target="_blank">Políticas AML/CFT</a>
+<a href="#">Contacto</a>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 Zendi. Todos los derechos reservados.</p>
+</div>
+</div>
+</footer>
+<script></script></body></html>
