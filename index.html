@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zendi – Soluciones Financieras Internacionales</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #2563eb;
+      --green: #10b981;
+      --dark: #111827;
+      --gray: #6b7280;
+      --light: #f9fafb;
+    }
+
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: white;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    .btn-demo {
+      background: var(--blue);
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: linear-gradient(to right, #e0f2fe, #ecfdf5);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      max-width: 800px;
+      margin: auto;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span.blue { color: var(--blue); }
+    .hero h1 span.green { color: var(--green); }
+
+    .hero p {
+      color: var(--gray);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--dark);
+      color: var(--dark);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      background: white;
+    }
+
+    .features {
+      padding: 4rem 2rem;
+      background: white;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .features-grid {
+      margin-top: 2rem;
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .feature-card {
+      background: #f9fafb;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    .feature-card h3 {
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .numbers {
+      background: linear-gradient(to right, #1e3a8a, #111827);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .numbers h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .number-box {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    .number-box h3 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer {
+      background: #0f172a;
+      color: white;
+      padding: 3rem 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer a {
+      display: block;
+      color: #cbd5e1;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .social-icons a {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: #60a5fa;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .features-grid, .numbers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🌐 Zendi</div>
+  <nav>
+    <ul>
+      <li><a href="#features">Características</a></li>
+      <li><a href="#numbers">Números</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+  <a class="btn-demo" href="https://calendly.com/leonardo-t-killb/30min" target="_blank">Agenda Demo</a>
+</header>
+
+<section class="hero">
+  <h1>Cobra como local. <span class="blue">Paga</span> <span class="green">internacionalmente.</span></h1>
+  <p>La solución moderna para agencias de viaje colombianas que quieren operar en el mundo sin límites.</p>
+  <div class="cta-buttons">
+    <a class="btn-primary" href="https://calendly.com/leonardo-t-killb/30min" target="_blank">Agenda tu Demo Gratuita</a>
+    <a class="btn-secondary" href="https://in.sumsub.com/websdk/p/uni_bbq1Fmms7C36I27m" target="_blank">Comenzar Onboarding</a>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <h2>Características que <span style="color: var(--blue);">transforman</span> tu negocio</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>💱 Conversiones Instantáneas</h3>
+      <p>Transferencias el mismo día con disponibilidad de conversión 24/7. Sin esperas, sin demoras.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🌍 Cuentas Multimoneda</h3>
+      <p>Recibe pagos en USD o EUR como si fueras una empresa local.</p>
+    </div>
+    <div class="feature-card">
+      <h3>⚡ Pagos Rápidos</h3>
+      <p>Paga a tus proveedores sin fricción y con costos mínimos.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🔁 Sin Fronteras</h3>
+      <p>Convierte a COP y envía dinero donde lo necesites.</p>
+    </div>
+  </div>
+</section>
+
+<section class="numbers" id="numbers">
+  <h2>Números que hablan por <span style="color: #60a5fa;">nosotros</span></h2>
+  <div class="numbers-grid">
+    <div class="number-box">
+      <h3>500+</h3>
+      <p>Agencias de viaje confían</p>
+    </div>
+    <div class="number-box">
+      <h3>50+</h3>
+      <p>Países de destino</p>
+    </div>
+    <div class="number-box">
+      <h3>24/7</h3>
+      <p>Disponibilidad</p>
+    </div>
+    <div class="number-box">
+      <h3>0%</h3>
+      <p>Comisiones ocultas</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="contact">
+  <div class="footer-content">
+    <div>
+      <h3>🌐 Zendi</h3>
+      <p>La solución financiera moderna para agencias de viaje colombianas que quieren operar globalmente sin límites.</p>
+      <div class="social-icons">
+        <a href="#">🐦</a>
+        <a href="#">🔗</a>
+        <a href="#">📷</a>
+      </div>
+    </div>
+    <div>
+      <h3>Enlaces Rápidos</h3>
+      <a href="#features">Características</a>
+      <a href="#numbers">Beneficios</a>
+      <a href="#contact">Contacto</a>
+    </div>
+    <div>
+      <h3>Contacto</h3>
+      <a href="mailto:soporte@zendi.co">📧 soporte@zendi.co</a>
+      <a href="#">📱 WhatsApp: +57 300 123 4567</a>
+      <a href="#">📍 Carrera 11 #93-07, Bogotá, Colombia</a>
+    </div>
+  </div>
+  <p style="margin-top: 2rem; font-size: 0.8rem; color: #94a3b8;">© 2025 Zendi. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
