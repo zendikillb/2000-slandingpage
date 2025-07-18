@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RETROANIMATION - Epic 2000s Landing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0ff 0%, #00f 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Press Start 2P', monospace;
+            color: #fff;
+            box-shadow: inset 0 0 100px #000a;
+        }
+        .retro-title {
+            font-size: 3rem;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 0 #ff0, 4px 4px 0 #f0f, 0 0 16px #fff;
+            margin-bottom: 0.5em;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 2px 2px 0 #ff0, 4px 4px 0 #f0f, 0 0 8px #fff; }
+            to { text-shadow: 2px 2px 8px #ff0, 4px 4px 16px #f0f, 0 0 32px #fff; }
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #0ff;
+            margin-bottom: 1em;
+            text-shadow: 1px 1px 0 #000, 0 0 8px #0ff;
+        }
+        .desc {
+            background: rgba(0,0,0,0.6);
+            border: 2px dashed #ff0;
+            padding: 1em 2em;
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 2em;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 0 16px #0ff8;
+        }
+        .retro-btn {
+            font-family: inherit;
+            font-size: 1.2rem;
+            background: linear-gradient(90deg, #ff0 0%, #f0f 100%);
+            color: #000;
+            border: 3px outset #fff;
+            border-radius: 8px;
+            padding: 0.7em 2em;
+            cursor: pointer;
+            box-shadow: 0 0 8px #fff, 0 0 32px #f0f8;
+            text-shadow: 1px 1px 0 #fff;
+            margin-bottom: 2em;
+            transition: transform 0.1s;
+        }
+        .retro-btn:hover {
+            transform: scale(1.08) rotate(-2deg);
+            background: linear-gradient(90deg, #f0f 0%, #ff0 100%);
+        }
+        .marquee {
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #000c;
+            color: #ff0;
+            font-size: 1rem;
+            padding: 0.2em 0;
+            border-bottom: 2px solid #ff0;
+            font-family: 'Press Start 2P', monospace;
+        }
+        .counter, .under-construction {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            font-size: 0.9rem;
+            color: #fff;
+            background: #000a;
+            padding: 0.3em 1em;
+            border-radius: 8px;
+            border: 2px solid #f0f;
+            font-family: 'Press Start 2P', monospace;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .under-construction {
+            left: auto;
+            right: 16px;
+            border-color: #ff0;
+            color: #ff0;
+            transition: border-color 0.2s;
+        }
+        .under-construction:hover {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both, flash-border 0.5s linear both;
+            border-color: #f0f;
+            color: #fff;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translateX(-2px); }
+            20%, 80% { transform: translateX(4px); }
+            30%, 50%, 70% { transform: translateX(-8px); }
+            40%, 60% { transform: translateX(8px); }
+            100% { transform: none; }
+        }
+        @keyframes flash-border {
+            0% { border-color: #ff0; }
+            25% { border-color: #f0f; }
+            50% { border-color: #ff0; }
+            75% { border-color: #f0f; }
+            100% { border-color: #ff0; }
+        }
+        .gif {
+            width: 32px;
+            height: 32px;
+            margin-right: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee"><marquee scrollamount="10">WELCOME TO THE EPIC RETROANIMATION LANDING PAGE! &nbsp; | &nbsp; Relive the web's golden age! &nbsp; | &nbsp; <b>Animated GIFs</b> &nbsp; | &nbsp; <b>Visitor Counter</b> &nbsp; | &nbsp; <b>Under Construction</b></marquee></div>
+    <div class="retro-title">RETROANIMATION</div>
+    <div class="subtitle">The Epic 2000s Web Experience</div>
+    <div class="desc">
+        <b>Welcome to RetroAnimation!</b><br>
+        Dive into a world of pixel fonts, neon gradients, and animated GIFs.<br>
+        This is a tribute to the golden era of the web.<br>
+        <span style="color:#ff0;">No scrolling. Just pure nostalgia.</span>
+    </div>
+    <button class="retro-btn" onclick="alert('You have entered the retro zone!')">ENTER</button>
+    <div class="counter">
+        <img class="gif" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="counter">
+        Visitor Counter: <span id="counter-num">00137</span>
+    </div>
+    <div class="under-construction">
+        <img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="under construction">
+        Under Construction
+    </div>
+</body>
+</html> 
